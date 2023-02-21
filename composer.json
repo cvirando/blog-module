@@ -2,6 +2,8 @@
     "name": "cvirando/blog",
     "description": "Tunnel CRM blog module.",
     "type": "laravel-module",
+    "license": "GPL-3.0-only",
+    "homepage": "https://github.com/cvirando/blog-module",
     "authors": [
         {
             "name": "CV. IRANDO",
