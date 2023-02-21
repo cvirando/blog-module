@@ -1,0 +1,26 @@
+{
+    "name": "cvirando/blog",
+    "description": "",
+    "type": "laravel-module",
+    "authors": [
+        {
+            "name": "CV. IRANDO",
+            "email": "info@irando.co.id"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Blog\\": ""
+        }
+    },
+    "require": {
+        "intervention/image": "^2.7"
+    }
+}

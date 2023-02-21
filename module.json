@@ -1,0 +1,17 @@
+{
+    "name": "Blog",
+    "alias": "blog",
+    "description": "Add blog to your project.",
+    "keywords": [
+        "cv irando",
+        "irando",
+        "blog",
+        "module",
+        "modules"
+    ],
+    "priority": 0,
+    "providers": [
+        "Modules\\Blog\\Providers\\BlogServiceProvider"
+    ],
+    "files": []
+}
