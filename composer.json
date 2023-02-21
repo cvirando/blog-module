@@ -1,5 +1,5 @@
 {
-    "name": "cvirando/blog-module",
+    "name": "cvirando/blog",
     "description": "Tunnel CRM blog module.",
     "type": "laravel-module",
     "authors": [
