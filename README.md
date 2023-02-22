@@ -6,6 +6,10 @@ Tunnel CRM blog module.
 
 ```
 composer require cvirando/blog-module
+
+php artisan module:migrate Blog
+
+php artisan module:seed Blog
 ```
 
 Developed by [CV. IRANDO](https://irando.co.id)
