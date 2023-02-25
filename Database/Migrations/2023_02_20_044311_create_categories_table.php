@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('photo')->nullable();
             $table->mediumText('description')->nullable();
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

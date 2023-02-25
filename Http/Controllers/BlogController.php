@@ -22,7 +22,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->with(['category'])->get();
+        $posts = Post::orderBy('id', 'desc')->where('active', true)->with(['category'])->get();
         return view('blog::index', compact('posts'));
     }
 
@@ -33,7 +33,7 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->with(['category'])->first();
+        $post = Post::where('slug', $slug)->where('active', true)->with(['category'])->first();
         return view('blog::show', compact('post'));
     }
 }

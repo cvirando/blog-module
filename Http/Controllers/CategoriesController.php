@@ -46,7 +46,7 @@ class CategoriesController extends Controller
     {
         $category = new Category;
         $category->name = $request->input('name');
-        $category->slug = $request->input('slug');
+        $category->active = $request->input('active');
         $category->description = $request->input('description');
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
@@ -60,7 +60,7 @@ class CategoriesController extends Controller
             $category->photo = $filename;
         }
         $category->save();
-        return view('blog::categories.index');
+        return redirect()->route('blogCategories');
     }
 
     /**
@@ -94,7 +94,7 @@ class CategoriesController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
-        $category->slug = $request->input('slug');
+        $category->active = $request->input('active');
         $category->description = $request->input('description');
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
@@ -112,7 +112,7 @@ class CategoriesController extends Controller
             }
         }
         $category->save();
-        return view('blog::categories.index');
+        return redirect()->route('blogCategories');
     }
 
     /**
@@ -124,6 +124,6 @@ class CategoriesController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return view('blog::categories.index');
+        return redirect()->route('blogCategories');
     }
 }

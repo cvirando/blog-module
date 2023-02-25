@@ -29,6 +29,7 @@ class BlogCategoriesTableSeeder extends Seeder
             'slug' => 'default-category',
             'photo' => null,
             'description' => '<p>This is your default category, feel free to edit or remove it.</p>',
+            'active' => true,
         ]);
     }
 }

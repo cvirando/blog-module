@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('photo')->nullable();
             $table->longText('description')->nullable();
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
         Schema::table('blog_posts', function (Blueprint $table) {

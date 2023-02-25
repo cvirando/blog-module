@@ -25,16 +25,30 @@
                                     <th scope="col">Photo</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Category</th>
+                                    <th scope="col">Published</th>
                                     <th width="120" scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($posts as $post)
                                     <tr>
-                                    <th scope="row">{{$post->id}}</th>
-                                    <td>{{$post->photo}}</td>
+                                    <td width="50" class="text-center">{{$post->id}}</td>
+                                    <td width="90" class="text-center">
+                                        @if($post->photo)
+                                        <img src="{{url('images')}}/{{$post->photo}}" alt="{{$post->name}}" width="80" height="80" class="rounded">
+                                        @else
+                                        <span>Not Found!</span>
+                                        @endif
+                                    </td>
                                     <td>{{$post->name}}</td>
                                     <td>{{$post->category->name}}</td>
+                                    <td width="80">
+                                        @if($post->active)
+                                        <span class="badge bg-success">Yes</span>
+                                        @else
+                                        <span class="badge bg-danger">No</span>
+                                        @endif
+                                    </td>
                                     <td width="120">
                                         <a href="{{route('blogPostsEdit', $post->id)}}" class="btn btn-sm btn-info">Edit</a>
                                         <button class="btn btn-sm btn-danger">Delete</button>

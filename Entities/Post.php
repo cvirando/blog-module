@@ -11,10 +11,12 @@ namespace Modules\Blog\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Blog\Entities\Category;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     protected $table = 'blog_posts';
 
@@ -24,6 +26,26 @@ class Post extends Model
         'slug',
         'photo',
         'description',
+        'active',
+    ];
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'active' => 'boolean',
     ];
 
     public function category()

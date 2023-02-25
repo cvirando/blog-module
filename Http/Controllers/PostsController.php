@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Blog\Entities\Category;
 use Modules\Blog\Entities\Post;
+use Illuminate\Support\Str;
+use Storage;
+use Image;
 
 class PostsController extends Controller
 {
@@ -45,7 +48,7 @@ class PostsController extends Controller
     {
         $post = new Post;
         $post->name = $request->input('name');
-        $post->slug = $request->input('slug');
+        $post->active = $request->input('active');
         $post->description = $request->input('description');
         $post->category_id = $request->input('category_id');
         if ($request->hasFile('photo')) {
@@ -60,7 +63,7 @@ class PostsController extends Controller
             $post->photo = $filename;
         }
         $post->save();
-        return view('blog::posts.index');
+        return redirect()->route('blogPosts');
     }
 
     /**
@@ -95,7 +98,7 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->name = $request->input('name');
-        $post->slug = $request->input('slug');
+        $post->active = $request->input('active');
         $post->description = $request->input('description');
         $post->category_id = $request->input('category_id');
         if ($request->hasFile('photo')) {
@@ -114,7 +117,7 @@ class PostsController extends Controller
             }
         }
         $post->save();
-        return view('blog::posts.index');
+        return redirect()->route('blogPosts');
     }
 
     /**
@@ -126,6 +129,6 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return view('blog::posts.index');
+        return redirect()->route('blogPosts');
     }
 }

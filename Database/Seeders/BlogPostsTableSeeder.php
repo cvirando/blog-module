@@ -30,6 +30,7 @@ class BlogPostsTableSeeder extends Seeder
             'slug' => 'hello-world',
             'photo' => null,
             'description' => '<h3>Welcome to Irando CRM.</h3><p>This is your first blog post, feel free to edit or remove it.</p>',
+            'active' => true,
         ]);
     }
 }
