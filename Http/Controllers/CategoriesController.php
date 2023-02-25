@@ -18,6 +18,11 @@ use Image;
 
 class CategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin|staff','permission:add blog categories|edit blog categories|delete blog categories']);
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable

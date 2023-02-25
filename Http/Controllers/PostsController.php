@@ -19,6 +19,11 @@ use Image;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin|staff','permission:add blog posts|edit blog posts|delete blog posts']);
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
