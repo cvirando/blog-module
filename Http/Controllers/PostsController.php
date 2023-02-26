@@ -16,6 +16,7 @@ use Modules\Blog\Entities\Post;
 use Illuminate\Support\Str;
 use Storage;
 use Image;
+use Schema;
 
 class PostsController extends Controller
 {
@@ -67,7 +68,30 @@ class PostsController extends Controller
             Image::make($image)->save($pathToBigImage);
             $post->photo = $filename;
         }
-        $post->save();
+        if(Schema::hasTable('seos')) {
+            if($post->save()) {
+                $seo = new \Modules\Seo\Entities\Seo;
+                $seo->name = $request->input('seo_name');
+                $seo->tags = $request->input('seo_tags');
+                $seo->description = $request->input('seo_description');
+                if ($request->hasFile('seo_photo')) {
+                    $image = $request->file('seo_photo');
+                    $filename = 'seo-' . time() . '.' . $image->getClientOriginalExtension();
+                    $location = public_path('images/'. $filename);
+                    $pathToThumbImage = public_path('images/thumb/'. $filename);
+                    $pathToBigImage = public_path('images/big/'. $filename);
+                    Image::make($image)->resize(1200, 672)->save($location); // for social media
+                    Image::make($image)->resize(250, 250)->save($pathToThumbImage);
+                    Image::make($image)->save($pathToBigImage);
+                    $seo->photo = $filename;
+                }
+                $seo->seoble_id = $post->id;
+                $seo->seoble_type = 'Modules\Blog\Entities\Post';
+                $seo->save();
+            }
+        } else {
+            $post->save();
+        }
         return redirect()->route('blogPosts');
     }
 
@@ -90,7 +114,13 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::orderBy('id', 'desc')->get();
-        return view('blog::posts.edit', compact('post', 'categories'));
+        if(Schema::hasTable('seos')) {
+            $seo = $post->seo()->first();
+            // dd($seo);
+            return view('blog::posts.edit', compact('post', 'categories', 'seo'));
+        } else {
+            return view('blog::posts.edit', compact('post', 'categories'));
+        }
     }
 
     /**
@@ -121,7 +151,30 @@ class PostsController extends Controller
                 Storage::delete($oldFilename);
             }
         }
-        $post->save();
+        if(Schema::hasTable('seos')) {
+            if($post->save()) {
+                $seo = new \Modules\Seo\Entities\Seo;
+                $seo->name = $request->input('seo_name');
+                $seo->tags = $request->input('seo_tags');
+                $seo->description = $request->input('seo_description');
+                if ($request->hasFile('seo_photo')) {
+                    $image = $request->file('seo_photo');
+                    $filename = 'seo-' . time() . '.' . $image->getClientOriginalExtension();
+                    $location = public_path('images/'. $filename);
+                    $pathToThumbImage = public_path('images/thumb/'. $filename);
+                    $pathToBigImage = public_path('images/big/'. $filename);
+                    Image::make($image)->resize(1200, 672)->save($location); // for social media
+                    Image::make($image)->resize(250, 250)->save($pathToThumbImage);
+                    Image::make($image)->save($pathToBigImage);
+                    $seo->photo = $filename;
+                }
+                $seo->seoble_id = $post->id;
+                $seo->seoble_type = 'Modules\Blog\Entities\Post';
+                $seo->save();
+            }
+        } else {
+            $post->save();
+        }
         return redirect()->route('blogPosts');
     }
 

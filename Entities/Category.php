@@ -51,4 +51,15 @@ class Category extends Model
     {
         return $this->hasMany(Post::class, 'category_id', 'id');
     }
+
+    public function seo() {
+        if(Schema::hasTable('seos')) {
+            return $this->morphMany('Modules\Seo\Entities\Seo', 'seoable');
+        }
+        return null;
+    }
+
+    public function verifySeo() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing('seos');
+    }
 }

@@ -15,7 +15,6 @@
                       <form action="{{route('blogPostsUpdate', $post->id)}}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
-
                           <div class="row">
                               <div class="col-md-6">
                                   <label for="name">Name</label>
@@ -72,11 +71,15 @@
                                     @endforeach
                                   </select>
                               </div>
-                              
                               <div class="col-md-12">
                                   <label for="description">Description</label>
                                   <textarea name="description" id="tinymce-mytextarea" class="form-control" cols="15" rows="5">{!!$post->description!!}</textarea>
                               </div>
+                            </div>
+                            @if(Schema::hasTable('seos') && Module::isEnabled('Seo'))
+                                @include('seo::form')
+                            @endif
+                            <div class="row">
                               <div class="col-md-12 mt-3 text-end">
                                   <button type="submit" class="btn btn-md btn-primary">Update</button>
                               </div>

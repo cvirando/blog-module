@@ -67,6 +67,11 @@
                                   <label for="description">Description</label>
                                   <textarea name="description" id="tinymce-mytextarea" class="form-control" cols="15" rows="5">{!!$category->description!!}</textarea>
                               </div>
+                            </div>
+                            @if(Schema::hasTable('seos') && Module::isEnabled('Seo'))
+                                @include('seo::form')
+                            @endif
+                            <div class="row">
                               <div class="col-md-12 mt-3 text-end">
                                   <button type="submit" class="btn btn-md btn-primary">Update</button>
                               </div>

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Blog\Entities\Category;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Schema;
 
 class Post extends Model
 {
@@ -51,5 +52,16 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function seo() {
+        if(Schema::hasTable('seos')) {
+            return $this->morphMany('Modules\Seo\Entities\Seo', 'seoable');
+        }
+        return null;
+    }
+
+    public function verifySeo() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing('seos');
     }
 }
