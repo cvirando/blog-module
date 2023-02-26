@@ -82,8 +82,8 @@ class CategoriesController extends Controller
                     Image::make($image)->save($pathToBigImage);
                     $seo->photo = $filename;
                 }
-                $seo->seoble_id = $category->id;
-                $seo->seoble_type = 'Modules\Blog\Entities\Category';
+                $seo->seoable_id = $category->id;
+                $seo->seoable_type = 'Modules\Blog\Entities\Category';
                 $category->save();
             }
         } else {
@@ -163,8 +163,8 @@ class CategoriesController extends Controller
                     Image::make($image)->save($pathToBigImage);
                     $seo->photo = $filename;
                 }
-                $seo->seoble_id = $category->id;
-                $seo->seoble_type = 'Modules\Blog\Entities\Category';
+                $seo->seoable_id = $category->id;
+                $seo->seoable_type = 'Modules\Blog\Entities\Category';
                 $category->save();
             }
         } else {

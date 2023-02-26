@@ -85,8 +85,8 @@ class PostsController extends Controller
                     Image::make($image)->save($pathToBigImage);
                     $seo->photo = $filename;
                 }
-                $seo->seoble_id = $post->id;
-                $seo->seoble_type = 'Modules\Blog\Entities\Post';
+                $seo->seoable_id = $post->id;
+                $seo->seoable_type = 'Modules\Blog\Entities\Post';
                 $seo->save();
             }
         } else {
@@ -168,8 +168,8 @@ class PostsController extends Controller
                     Image::make($image)->save($pathToBigImage);
                     $seo->photo = $filename;
                 }
-                $seo->seoble_id = $post->id;
-                $seo->seoble_type = 'Modules\Blog\Entities\Post';
+                $seo->seoable_id = $post->id;
+                $seo->seoable_type = 'Modules\Blog\Entities\Post';
                 $seo->save();
             }
         } else {
