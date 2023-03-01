@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Blog Categories</h5>
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table-default table table-striped table-hover table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -66,7 +66,11 @@
                                     </td>
                                     <td width="120">
                                         <a href="{{route('blogCategoriesEdit', $category->id)}}" class="btn btn-sm btn-info">Edit</a>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                        <form style="display: inline;" action="{{route('blogCategoriesDelete', $category->id)}}" onclick="return deleletconfig()" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                                        </form>
                                     </td>
                                     </tr>
                                     @endforeach
@@ -78,6 +82,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

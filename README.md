@@ -2,7 +2,7 @@
 
 Tunnel CRM blog module.
 
-## Install
+## How to install
 
 ```
 composer require cvirando/blog-module
