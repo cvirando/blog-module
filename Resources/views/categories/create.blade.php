@@ -1,31 +1,50 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <div class="col">
+        <!-- Page pre-title -->
+        <div class="page-pretitle">
+        Module
+        </div>
+        <h2 class="page-title">
+        Blog/Categories
+        </h2>
+    </div>
+@endsection
+
+@section('pagelinks')
+<div class="col-auto ms-auto d-print-none">
+    <div class="btn-list"></div>
+    <div class="d-none d-sm-inline">
+        <a class="btn btn-warning btn-block my-2" href="{{route('blogCategories')}}">Back</a>
+    </div>
+</div>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">
-                        Add New Blog Category
-                        <span class="float-end">
-                            <a href="{{route('blogCategories')}}" class="btn btn-md btn-warning">Back</a>
-                        </span>
-                    </h5>
-                      <form action="{{route('blogCategoriesStore')}}" method="POST" enctype="multipart/form-data">
-                          @csrf
-                          @method('POST')
+                        <h5 class="card-title">
+                            Add New Blog Category
+                        </h5>
+                        <hr>
+                        <form action="{{route('blogCategoriesStore')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('POST')
 
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <label for="name">Name</label>
-                                  <input type="text" name="name" id="name" class="form-control">
-                              </div>
-                              <div class="col-md-6">
-                                  <label for="photo">Photo</label>
-                                  <input type="file" name="photo" id="photo" class="form-control">
-                              </div>
-                              <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" id="name" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="photo">Photo</label>
+                                    <input type="file" name="photo" id="photo" class="form-control">
+                                </div>
+                                <div class="col-md-6">
                                 <label class="form-label">Publish</label>
                                 <div class="form-selectgroup-boxes row mb-3">
                                 <div class="col-lg-6">
@@ -57,23 +76,23 @@
                                     </label>
                                 </div>
                                 </div>
-                              </div>
-                              <div class="col-md-12">
-                                  <label for="description">Description</label>
-                                  <textarea name="description" id="tinymce-mytextarea" class="form-control" cols="15" rows="5"></textarea>
-                              </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="tinymce-mytextarea" class="form-control" cols="15" rows="5"></textarea>
+                                </div>
                             </div>
                             @if(Schema::hasTable('seos') && Module::isEnabled('Seo'))
                                 @include('seo::form')
                             @endif
                             <div class="row">
-                              <div class="col-md-12 mt-3 text-end">
-                                  <button type="submit" class="btn btn-md btn-primary">Save</button>
-                              </div>
-                          </div>
-                      </form>
+                                <div class="col-md-12 mt-3 text-end">
+                                    <button type="submit" class="btn btn-md btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>

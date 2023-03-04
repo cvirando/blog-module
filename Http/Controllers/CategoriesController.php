@@ -15,7 +15,7 @@ use Modules\Blog\Entities\Category;
 use Illuminate\Support\Str;
 use Storage;
 use Image;
-use Schema;
+use Illuminate\Support\Facades\Schema;
 
 class CategoriesController extends Controller
 {

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Blog\Entities\Post;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Facades\Schema;
 
 class Category extends Model
 {
