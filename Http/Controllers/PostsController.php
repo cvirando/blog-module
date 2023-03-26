@@ -14,6 +14,7 @@ use Illuminate\Routing\Controller;
 use Modules\Blog\Entities\Category;
 use Modules\Blog\Entities\Post;
 use Illuminate\Support\Str;
+use Notification;
 use Storage;
 use Image;
 use Schema;
@@ -91,6 +92,22 @@ class PostsController extends Controller
             }
         } else {
             $post->save();
+        }
+
+        if($post->active) {
+            if(Schema::hasTable('telegram_settings')) {
+                $type = $post->photo != null ? 'image' : 'text';
+                $image = $post->photo != null ? url('images').'/'.$post->photo : null;
+                $Tset = \Modules\Telegram\Entities\TelegramSetting::pluck('auto_posts');
+                if($Tset == '[true]'){
+                    $token = config('telegram.telegram-bot-api.token');
+                    $channels = \Modules\Telegram\Entities\TelegramChannel::all();
+
+                    foreach($channels as $channel) {
+                        Notification::route('telegram', $channel->channel_id)->notify(new \Modules\Telegram\Notifications\TelegramSendMessage($type, "NEW POST\n\n".route('blogShow', $post->slug)."", null, null, $image, null, null, null, null, null));
+                    }
+                }
+            }
         }
         return redirect()->route('blogPosts');
     }
