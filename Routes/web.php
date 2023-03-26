@@ -24,7 +24,6 @@ Route::prefix('blog/posts')->group(function() {
     Route::get('/edit/{id}', 'PostsController@edit')->name('blogPostsEdit');
     Route::put('/update/{id}', 'PostsController@update')->name('blogPostsUpdate');
     Route::delete('/delete/{id}', 'PostsController@destroy')->name('blogPostsDelete');
-
 });
 Route::prefix('blog/categories')->group(function() {
     Route::get('/', 'CategoriesController@index')->name('blogCategories');
@@ -34,7 +33,6 @@ Route::prefix('blog/categories')->group(function() {
     Route::put('/update/{id}', 'CategoriesController@update')->name('blogCategoriesUpdate');
     Route::delete('/delete/{id}', 'CategoriesController@destroy')->name('blogCategoriesDelete');
 });
-
 Route::prefix('blog')->group(function() {
     Route::get('/', 'BlogController@index')->name('blogIndex');
     Route::get('/{slug}', 'BlogController@show')->name('blogShow');

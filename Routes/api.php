@@ -5,7 +5,7 @@
  * https://irando.co.id ©2023
  * info@irando.co.id
  */
- 
+
 use Illuminate\Http\Request;
 
 /*
@@ -19,6 +19,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/blog', function (Request $request) {
-    return $request->user();
+
+Route::prefix('blog')->group(function() {
+    //show all posts
+    Route::get('/', 'Api\BlogController@index');
+    //show single post
+    Route::get('/posts/{slug}', 'Api\BlogController@post');
+    //show single category with posts
+    Route::get('/categories/{slug}', 'Api\BlogController@category');
 });
